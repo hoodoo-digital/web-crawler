@@ -1,0 +1,44 @@
+pipeline {
+   agent any
+
+   environment {
+              CC_LIST = 'pablo@hoodoo.digital'
+              PIPE_NAME = 'Crawler'
+          }
+
+   stages {
+      stage('Build') {
+            steps {
+                sh "python3 -m venv venv && source venv/bin/activate && pip install -r requirements.txt"
+            }
+        }
+        stage('Crawl') {
+            steps {
+                sh "make crawl"
+                }
+            }
+    	}
+
+         post {
+             always {
+                archiveArtifacts artifacts: 'results/*.csv', fingerprint: true
+            }
+         }
+      }
+   }
+   post {
+        always {
+             mail to: "${CC_LIST}",
+             from: 'pablo@hoodoo.digital',
+             subject: "Process completed ${PIPE_NAME}: ${currentBuild.fullDisplayName} [${env.BUILD_NUMBER}]",
+             body: """ CRAWL REPORT
+
+                 Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':
+
+                 Job Name: ${env.JOB_NAME}
+                 Job Number: ${env.BUILD_NUMBER}
+                 Check crawlr report at  ${env.BUILD_URL}results/
+                 """
+        }
+    }
+}
