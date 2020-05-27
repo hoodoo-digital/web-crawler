@@ -10,10 +10,11 @@ pipeline {
       stage('Build and Crawl') {
             steps { 
                 sh """
+                    mkdir -p results
                     python3 -m venv venv
                     . venv/bin/activate
                     pip install -r requirements.txt
-                    make crawl
+                    scrapy runspider scripts/crawl.py -t csv -o - > results/spider-report-file.csv
                     """
                  archiveArtifacts artifacts: 'results/*.csv', fingerprint: true
             }

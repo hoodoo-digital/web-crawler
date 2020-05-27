@@ -14,6 +14,6 @@ DISALLOWED_DOMAINS = ['www.adobe.com']
 # override settings
 NAME = 'override'
 ALLOWED_DOMAINS = ['allowed_domains']
-START_URLS = ['list_of_urls']
+START_URLS = ['https://google.com']
 
 INCLUDE_CHILDS=False
