@@ -12,7 +12,7 @@ pipeline {
                 sh """
                     python3 -m venv env
                     . ./env/bin/activate 
-                    pip install --user -r requirements.txt
+                    pip3 install -r requirements.txt
                     mkdir -p results
                     scrapy runspider scripts/crawl.py -t csv -o -> results/spider-report-file.csv
                 """
