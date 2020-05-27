@@ -22,7 +22,9 @@ class MySpider(scrapy.Spider):
     custom_settings = {
         'CONCURRENT_REQUESTS': settings.CONCURRENT_REQUESTS_PER_DOMAIN,
         # Delay in seconds between requests
-        'DOWNLOAD_DELAY': settings.DOWNLOAD_DELAY
+        'DOWNLOAD_DELAY': settings.DOWNLOAD_DELAY,
+        'FEED_URI' : settings.OUTPUT_FILE,
+        'FEED_FORMAT': settings.OUTPUT_FORMAT,
     }
 
     def start_requests(self):

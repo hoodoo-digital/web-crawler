@@ -14,7 +14,7 @@ pipeline {
                     . ./env/bin/activate 
                     pip3 install -r requirements.txt
                     mkdir -p results
-                    scrapy runspider scripts/crawl.py -t csv -o - > results/spider-report-file.csv
+                    scrapy runspider scripts/crawl.py
                 """
             }
             post {
