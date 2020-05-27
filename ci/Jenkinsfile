@@ -8,16 +8,11 @@ pipeline {
 
    stages {
       stage('Build') {
-            steps {
-                sh "python3 -m venv venv && source venv/bin/activate && pip install -r requirements.txt"
-            }
+            steps { sh "python3 -m venv venv && source venv/bin/activate && pip install -r requirements.txt" }
         }
         stage('Crawl') {
-            steps {
-                sh "make crawl"
-                }
-            }
-    	}
+            steps { sh "make crawl" }
+        }
 
         post {
              always {
