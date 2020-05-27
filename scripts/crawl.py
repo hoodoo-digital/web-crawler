@@ -41,6 +41,7 @@ class MySpider(scrapy.Spider):
                     url = response.urljoin(href)
                     # filter unique and valid
                     if self.isUniqueUrl(url) and self.shouldFollow(url) and self.isAllowed(url):               
+                        self.log(f'URL: {url}')
                         yield scrapy.Request(url, self.parse, dont_filter=False, meta={'referer': response.url})
                 except:
                     self.log(f'Something bad happen with {response}')
