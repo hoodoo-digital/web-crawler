@@ -1,23 +1,29 @@
 pipeline {
-   agent any
+   agent { docker { image 'python:3.7.2' } }
 
    environment {
               CC_LIST = 'pablo@hoodoo.digital'
               PIPE_NAME = 'Crawler'
           }
 
-   stages {
-      stage('Build and Crawl') {
+    stages {
+        stage('build') {
+            steps {
+                sh 'pip install -r requirements.txt'
+            } 
+        }
+        stage('Crawl') {
             steps { 
                 sh """
                     mkdir -p results
-                    python3 -m venv venv
-                    source venv/bin/activate
-                    pip install -r requirements.txt
                     scrapy runspider scripts/crawl.py -t csv -o -> results/spider-report-file.csv
-                    """
-                 archiveArtifacts artifacts: 'results/*.csv', fingerprint: true
+                    """             
             }
+            post {
+                always {
+                    archiveArtifacts artifacts: 'results/*.csv', fingerprint: true
+                }
+            }  
         }
    }
    post {
