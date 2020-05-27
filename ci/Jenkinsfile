@@ -19,12 +19,11 @@ pipeline {
             }
     	}
 
-         post {
+        post {
              always {
                 archiveArtifacts artifacts: 'results/*.csv', fingerprint: true
             }
-         }
-      }
+        }
    }
    post {
         always {
