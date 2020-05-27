@@ -2,7 +2,6 @@ import scrapy
 from dynaconf import settings
 
 REPORT_ID=settings.REPORT_IF
-REPLACE_DOMAIN=settings.REPLACE_DOMAIN
 INCLUDE_CHILDS=settings.INCLUDE_CHILDS
 unique_urls = []
 unique_items = []

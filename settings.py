@@ -15,3 +15,5 @@ DISALLOWED_DOMAINS = ['www.adobe.com']
 NAME = 'override'
 ALLOWED_DOMAINS = ['allowed_domains']
 START_URLS = ['list_of_urls']
+
+INCLUDE_CHILDS=False
