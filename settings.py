@@ -7,7 +7,7 @@ AUTOTHROTTLE_ENABLED = True
 # status codes to be reported in CSV
 REPORT_IF = [404, 500, 400, 503]
 INCLUDE_CHILDS = False
-OUTPUT_FILE= 'results/scrapy-results.csv'
+OUTPUT_FILE= 'file:///results/scrapy-results.csv'
 OUTPUT_FORMAT='csv'
 # pass in a list of domains
 
