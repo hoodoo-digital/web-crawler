@@ -7,16 +7,15 @@ pipeline {
           }
 
    stages {
-      stage('Build') {
-            steps { sh "python3 -m venv venv"
-                    sh "source venv/bin/activate"
-                    sh "pip install -r requirements.txt" 
-            }
-        }
-        stage('Crawl') {
+      stage('Build and Crawl') {
             steps { 
-                sh "make crawl" 
-                archiveArtifacts artifacts: 'results/*.csv', fingerprint: true
+                sh """
+                    python3 -m venv venv
+                    sudo . venv/bin/activate
+                    sudo pip install -r requirements.txt
+                    make crawl
+                    """
+                 archiveArtifacts artifacts: 'results/*.csv', fingerprint: true
             }
         }
    }
