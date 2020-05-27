@@ -9,7 +9,9 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                sh 'pip install --user -r requirements.txt'
+                sh """
+                    pip3 install --user -r requirements.txt
+                """
             } 
         }
         stage('Crawl') {
