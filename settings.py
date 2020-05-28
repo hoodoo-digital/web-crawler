@@ -18,4 +18,4 @@ NAME = 'override'
 ALLOWED_DOMAINS = ['allowed_domains']
 START_URLS = ['https://google.com']
 
-INCLUDE_CHILDS=False
+INCLUDE_CHILDREN=False

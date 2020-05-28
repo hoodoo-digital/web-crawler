@@ -2,7 +2,7 @@ import scrapy
 from dynaconf import settings
 
 REPORT_ID=settings.REPORT_IF
-INCLUDE_CHILDS=settings.INCLUDE_CHILDS
+INCLUDE_CHILDREN=settings.INCLUDE_CHILDREN
 unique_urls = []
 unique_items = []
 
@@ -68,7 +68,7 @@ class MySpider(scrapy.Spider):
             return []
 
     def isAllowedUrl(self, url):
-        if not INCLUDE_CHILDS:
+        if not INCLUDE_CHILDREN:
             return url in self.start_urls
         
         for s in settings.START_URLS:
