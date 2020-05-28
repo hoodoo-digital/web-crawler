@@ -37,7 +37,7 @@ class MySpider(scrapy.Spider):
             yield scrapy.Request(response.url, self.parse, dont_filter=False, meta={'referer': response.meta['referer']})
         if self.isAllowedUrl(response.url):
             # fetch all links
-            for href in response.xpath('//a/@href').getall():
+            for href in self.getLinks(response):
                 try:
                     # handle relative URLs
                     url = response.urljoin(href)
@@ -58,6 +58,14 @@ class MySpider(scrapy.Spider):
             item['response_status'] = response.status
             item['response_page'] = response.url
             yield item  
+
+    @staticmethod
+    def getLinks(response):
+        # this avoids an error trying to fetch links from non html links
+        try: 
+            return response.xpath('//a/@href').getall()
+        except:
+            return []
 
     def isAllowedUrl(self, url):
         if not INCLUDE_CHILDS:
