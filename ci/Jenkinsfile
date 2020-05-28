@@ -13,13 +13,14 @@ pipeline {
                     python3 -m venv env
                     . ./env/bin/activate 
                     pip3 install -r requirements.txt
+                    rm -r results
                     mkdir -p results
                     scrapy runspider scripts/crawl.py
                 """
             }
             post {
                 always {
-                    archiveArtifacts artifacts: 'results/*.csv', fingerprint: true
+                    archiveArtifacts artifacts: 'results/*.csv'
                 }
             }
         }

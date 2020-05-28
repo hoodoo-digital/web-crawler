@@ -17,7 +17,7 @@ class MyItems(scrapy.Item):
 class MySpider(scrapy.Spider):
     name = settings.NAME
     start_urls = settings.START_URLS
-    handle_httpstatus_list = settings.REPORT_IF
+    handle_httpstatus_list = [200,400,403,404,500,503]
     handle_httpstatus_all = True
     custom_settings = {
         'CONCURRENT_REQUESTS': settings.CONCURRENT_REQUESTS_PER_DOMAIN,
@@ -71,7 +71,7 @@ class MySpider(scrapy.Spider):
         if not INCLUDE_CHILDS:
             return url in self.start_urls
         
-        for s in settings.ALLOWED_DOMAINS:
+        for s in settings.START_URLS:
             if url.startswith(s):
                 return True
         return False
