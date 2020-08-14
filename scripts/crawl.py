@@ -72,7 +72,7 @@ class MySpider(scrapy.Spider):
             return url in self.start_urls
         
         for s in settings.START_URLS:
-            if url.startswith(s):
+            if url.startswith(s.replace('.html','')):
                 return True
         return False
 
